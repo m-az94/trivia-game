@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css?family=Poiret+One");
+*{
+    font-family: 'Poiret One', cursive;
+}
+body {
+    background-image: url("../images/background.jpg");
+}
+.container {
+    margin: auto;
+}
+#sbuxHeader{
+    background-color: #007044;
+    margin-bottom:10px;
+    padding-bottom: 10px;
+}
+.frapGifHeader{
+    width: 150px;
+    height: auto;
+    margin:10px 0px 10px 0px;
+    padding:0px;
+}
+#sbxTitle, #sbxTagline, #startBtn {
+    color: #FFF;
+    text-align: center;
+}
+#startBtn{
+    border: 1px solid #FFF;
+}
+#sbxTitle{
+    font-size: 60px;
+    margin-top: 45px;
+
+}
+#quiz{
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #007044;
+    color:#fff;
+    width: 900px;
+    height: auto;
+    padding-bottom: 10px;
+}
+#timer{
+    font-size: 20px;
+}
+
+#question{
+    font-size: 30px;
+}
+#responseImg{
+    height:300px;
+}
+footer {
+    margin-top: 10px;
+    background-color: #007044;
+    color: #FFF;
+    text-align: center;
+    position: absolute;
+    bottom:0px;
+    left: 0px;
+    overflow: auto;
+    width: 100%;
+    margin:0px, 0px, 0px, 0px;
+}
