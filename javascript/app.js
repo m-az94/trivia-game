@@ -13,37 +13,30 @@ var sbxQuiz=[
 ];
 
 // Set variables that can keep score of trivia game
+var correct=0;
+var incorrect=0;
+var unanswered=0;
+var setTime=30;
+var gameTimer=setInterval(trivia,1000);
+var time=0;
 
-
-//------THE FUNCTIONS--------
-$("#startBtn").on("click", function(){
-    var correct=0;
-    var incorrect=0;
-    var unanswered=0;
-    var setTime=30;
-    var gameTimer=setInterval(questionTimer,1000);
-
-    //timer
-function questionTimer(){
-    setTime--;
-    $("#timer").text("Time: "+setTime+"s");
-    if(setTime===0){
-        console.log("Time's Up");
-        stopTimer();
-        question.text("");
-        optionA.text("");
-        optionB.text("");
-        optionC.text("");
-        optionD.text("");
-        unanswered++;
-        $("#response").text("You're Out of Time");
-        $("#responseImg").attr("src", "images/catbux.gif");
-    }
+for (var i=0; i<sbxQuiz.length; i++){
+    setInterval(trivia(i), time);
+    time+=3300;
 }
+
 function stopTimer(){
     clearInterval(gameTimer);
 }
-function quiz(i){
+
+//Game Functions
+function trivia(i){
+
+    //timers
+    setTime--;
+    $("#timer").text("Time: "+setTime+"s");
+
+    //Quiz
     var question = $("#question");
     question.text(sbxQuiz[i].q);
     //display option a
@@ -58,9 +51,22 @@ function quiz(i){
     //display option d
     var optionD=$("#d");
     optionD.text(sbxQuiz[i].d);
-
-    $(".option").on("click", function(){
-        var answer =this.id;
+    if(setTime===0){
+        console.log("Time's Up");
+        stopTimer();
+        question.text("");
+        optionA.text("");
+        optionB.text("");
+        optionC.text("");
+        optionD.text("");
+        unanswered++;
+        $("#response").text("You're Out of Time");
+        $("#responseImg").attr("src", "images/catbux.gif");
+        i++;
+    }
+    else{
+        $(".option").on("click", function(){
+            var answer =this.id;
             question.text("");
             optionA.text("");
             optionB.text("");
@@ -82,8 +88,15 @@ function quiz(i){
                 $("#response").text("Wrong!");
                 $("#responseImg").attr("src", "images/kardashian.gif");
             }
-    });
+            i++;
+        });
+    }
 }
+
+
+//------GAME PLAY--------
+$("#startBtn").on("click", function(){
+
 });
 
 
