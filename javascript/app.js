@@ -17,25 +17,33 @@ var correct=0;
 var incorrect=0;
 var unanswered=0;
 var setTime=30;
-var gameTimer=setInterval(trivia,1000);
+var gameTimer=setInterval(questionTimer,1000);
 var time=0;
 
-for (var i=0; i<sbxQuiz.length; i++){
-    setInterval(trivia(i), time);
-    time+=3300;
+//Timer Functions 
+function questionTimer(){
+    setTime--;
+    $("#timer").text("Time: "+setTime+"s");
+    if(setTime===0){
+        console.log("Time's Up");
+        stopTimer();
+        question.text("");
+        optionA.text("");
+        optionB.text("");
+        optionC.text("");
+        optionD.text("");
+        unanswered++;
+        $("#response").text("You're Out of Time");
+        $("#responseImg").attr("src", "images/catbux.gif");
+        i++;
+    }
 }
-
 function stopTimer(){
     clearInterval(gameTimer);
 }
 
 //Game Functions
-function trivia(i){
-
-    //timers
-    setTime--;
-    $("#timer").text("Time: "+setTime+"s");
-
+function displayTrivia(i){
     //Quiz
     var question = $("#question");
     question.text(sbxQuiz[i].q);
@@ -51,51 +59,39 @@ function trivia(i){
     //display option d
     var optionD=$("#d");
     optionD.text(sbxQuiz[i].d);
-    if(setTime===0){
-        console.log("Time's Up");
-        stopTimer();
+}
+
+$(".option").on("click", function(){
+    var answer =this.id;
         question.text("");
         optionA.text("");
         optionB.text("");
         optionC.text("");
         optionD.text("");
-        unanswered++;
-        $("#response").text("You're Out of Time");
-        $("#responseImg").attr("src", "images/catbux.gif");
+        console.log(sbxQuiz[i].answer);
+        console.log(answer);
+        if (answer===sbxQuiz[i].answer){
+            console.log("you're right");
+            correct++;
+            $("#response").text("You're Right");
+            $("#responseImg").attr("src", "images/tenor.gif");
+            
+    
+        }
+        else{
+            console.log("wrong");
+            incorrect++;
+            $("#response").text("Wrong!");
+            $("#responseImg").attr("src", "images/kardashian.gif");
+        }
         i++;
-    }
-    else{
-        $(".option").on("click", function(){
-            var answer =this.id;
-            question.text("");
-            optionA.text("");
-            optionB.text("");
-            optionC.text("");
-            optionD.text("");
-            console.log(sbxQuiz[i].answer);
-            console.log(answer);
-            if (answer===sbxQuiz[i].answer){
-                console.log("you're right");
-                correct++;
-                $("#response").text("You're Right");
-                $("#responseImg").attr("src", "images/tenor.gif");
-                
-        
-            }
-            else{
-                console.log("wrong");
-                incorrect++;
-                $("#response").text("Wrong!");
-                $("#responseImg").attr("src", "images/kardashian.gif");
-            }
-            i++;
-        });
-    }
-}
+});
 
 
 //------GAME PLAY--------
 $("#startBtn").on("click", function(){
+    //all functions above work operate properly
+    //don't know how to organize the functions into working trivia game with timers
 
 });
 
